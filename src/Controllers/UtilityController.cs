@@ -18,9 +18,9 @@ namespace AlatAssessment.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IWemaInternal wemaInternal;
-        private readonly ILogger logger;
+        private readonly ILogger<UtilityController> logger;
 
-        public UtilityController(IUnitOfWork unitOfWork ,IWemaInternal wemaInternal,ILogger logger)
+        public UtilityController(IUnitOfWork unitOfWork ,IWemaInternal wemaInternal,ILogger<UtilityController> logger)
         {
             this.unitOfWork = unitOfWork;
             this.wemaInternal = wemaInternal;

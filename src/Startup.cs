@@ -40,9 +40,13 @@ namespace AlatAssessment
         {
             AppSettings.ConnectionString = Configuration["ConnectionString"];
             AppSettings.SubscriptionKey = Configuration["SubscriptionKey"];
-            AppSettings.WemaInternalUrl = Configuration["WemaInteralUrl"];
+            AppSettings.WemaInternalUrl = Configuration["WemaInternalUrl"];
             services.AddScoped<ModelStateValidator>();
-
+            services.AddLogging(config =>
+            {
+                config.AddConsole();
+                config.AddDebug();
+            });
             services.AddScoped<IUnitOfWork, AppUnitOfWork>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ILgaRepo, LgaRepository>();

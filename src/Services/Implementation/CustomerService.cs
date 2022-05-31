@@ -67,18 +67,12 @@ namespace AlatAssessment.Services.Implementation
 
             private static string HashPassword(string password)
             {
-                byte[] salt = new byte[128 / 8];
-                using (var rngCsp = new RNGCryptoServiceProvider())
+                using (var sha = new System.Security.Cryptography.SHA256Managed())
                 {
-                    rngCsp.GetNonZeroBytes(salt);
+                    byte[] textData = System.Text.Encoding.UTF8.GetBytes(password);
+                    byte[] hash = sha.ComputeHash(textData);
+                    return BitConverter.ToString(hash).Replace("-", string.Empty);
                 }
-
-                return Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                    password: password.Trim(),
-                    salt: salt,
-                    prf: KeyDerivationPrf.HMACSHA256,
-                    iterationCount: 100000,
-                    numBytesRequested: 256 / 8));
             }
         }
     }

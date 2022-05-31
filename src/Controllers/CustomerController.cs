@@ -17,9 +17,9 @@ namespace AlatAssessment.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
-        private readonly ILogger logger;
+        private readonly ILogger<CustomerController> logger;
 
-        public CustomerController(ICustomerService customerService,ILogger logger)
+        public CustomerController(ICustomerService customerService, ILogger<CustomerController> logger)
         {
             _customerService = customerService;
             this.logger = logger;
