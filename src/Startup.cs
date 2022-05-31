@@ -12,12 +12,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using AlatAssessment.DataAccess.Contexts;
 using AlatAssessment.DataAccess.Interfaces;
 using AlatAssessment.DataAccess.Repositories;
 using AlatAssessment.DataAccess.UnitOfWork;
 using AlatAssessment.Helpers;
+using AlatAssessment.Services;
 using AlatAssessment.Services.Implementation;
 using AlatAssessment.Services.Interfaces;
 using AutoMapper;
@@ -38,42 +40,20 @@ namespace AlatAssessment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            AppSettings.ConnectionString = Configuration["ConnectionString"];
-            AppSettings.SubscriptionKey = Configuration["SubscriptionKey"];
-            AppSettings.WemaInternalUrl = Configuration["WemaInternalUrl"];
+           
             services.AddScoped<ModelStateValidator>();
             services.AddLogging(config =>
             {
                 config.AddConsole();
                 config.AddDebug();
             });
-            services.AddScoped<IUnitOfWork, AppUnitOfWork>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<ILgaRepo, LgaRepository>();
-            services.AddScoped<ICountryStateRepo, CountryStateRepository>();
-            services.AddScoped<INotificationService,NotificationService>();
-            services.AddScoped<ICustomerService,CustomerService >();
-            services.AddScoped<IWemaInternal,WemaInternal>();
 
-            services.AddHttpClient(WemaInternal.ClientProxy.WemaInternal, client =>
-            {
-                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", AppSettings.SubscriptionKey);
-            }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
-            {
-                AutomaticDecompression = DecompressionMethods.GZip,
-                ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => true
-            }).SetHandlerLifetime(TimeSpan.FromMinutes(300));
-
-
-            //Add auto mapper service
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new CustomerService.CustomerProfile());
-            });
-            var mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
-
-
+            services.ConfigureAppSettings(Configuration)
+                .ConfigureRepositories()
+                .ConfigureMapper()
+                .ConfigureAppServices();
+            
+            
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(AppSettings.ConnectionString));

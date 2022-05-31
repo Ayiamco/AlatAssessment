@@ -16,6 +16,7 @@ namespace AlatAssessment.Test.CustomerServiceTests
         protected internal readonly Mock<IUnitOfWork> unitOfWork;
         protected internal readonly Mock<INotificationService> notificationService;
         protected internal readonly ICustomerService customerService;
+        protected internal readonly Mock<IPasswordManager> passwordManager;
 
         public BaseCustomerServiceTest()
         {
@@ -24,7 +25,8 @@ namespace AlatAssessment.Test.CustomerServiceTests
             IMapper mapper = new Mapper(configuration);
             unitOfWork = new Mock<IUnitOfWork>();
             notificationService = new Mock<INotificationService>();
-            customerService = new CustomerService(unitOfWork.Object, notificationService.Object, mapper);
+            passwordManager = new Mock<IPasswordManager>();
+            customerService = new CustomerService(unitOfWork.Object, notificationService.Object, mapper,passwordManager.Object);
         }
     }
 }

@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using AlatAssessment.DTOs;
 using AlatAssessment.Helpers;
 using AlatAssessment.Services.Interfaces;
+
 using Newtonsoft.Json;
 
 namespace AlatAssessment.Services.Implementation
 {
-    public class WemaInternal : IWemaInternal
+    public class WemaInternalHttpProxyHttpProxy : IWemaInternalHttpProxy
     {
         private readonly IHttpClientFactory _clientFactory;
 
-        public WemaInternal(IHttpClientFactory clientFactory)
+        public WemaInternalHttpProxyHttpProxy(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }

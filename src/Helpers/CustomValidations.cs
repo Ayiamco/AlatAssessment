@@ -12,9 +12,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlatAssessment.Helpers
 {
-    public class LGAValidation : ValidationAttribute
+    public class LgaValidation : ValidationAttribute
     {
-
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var context = (AppDbContext)validationContext.GetService(typeof(AppDbContext));
@@ -24,8 +23,12 @@ namespace AlatAssessment.Helpers
                 return new ValidationResult("lgaId is not valid.");
 
             var stateId = validationContext.ObjectType.GetProperty(nameof(AddCustomerDTO.StateId));
-            var stateIdValue= (int)stateId.GetValue(validationContext.ObjectInstance);
+            if (stateId == null) return new ValidationResult("stateId is invalid.");
 
+            var val = stateId.GetValue(validationContext.ObjectInstance);
+            if(val==null) return new ValidationResult("stateId is invalid.");
+
+            var stateIdValue= (int)val;
             return lga.StateId == stateIdValue? ValidationResult.Success : new ValidationResult("stateId does not match lgaId.");
         }
     }

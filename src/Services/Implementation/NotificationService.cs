@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AlatAssessment.Services.Interfaces;
+﻿using AlatAssessment.Services.Interfaces;
 
 namespace AlatAssessment.Services.Implementation
 {

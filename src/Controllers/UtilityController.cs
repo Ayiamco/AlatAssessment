@@ -17,13 +17,13 @@ namespace AlatAssessment.Controllers
     public class UtilityController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
-        private readonly IWemaInternal wemaInternal;
+        private readonly IWemaInternalHttpProxy _wemaInternalHttpProxy;
         private readonly ILogger<UtilityController> logger;
 
-        public UtilityController(IUnitOfWork unitOfWork ,IWemaInternal wemaInternal,ILogger<UtilityController> logger)
+        public UtilityController(IUnitOfWork unitOfWork ,IWemaInternalHttpProxy wemaInternalHttpProxy,ILogger<UtilityController> logger)
         {
             this.unitOfWork = unitOfWork;
-            this.wemaInternal = wemaInternal;
+            this._wemaInternalHttpProxy = wemaInternalHttpProxy;
             this.logger = logger;
         }
 
@@ -64,7 +64,7 @@ namespace AlatAssessment.Controllers
         {
             try
             {
-                var data = await wemaInternal.GetBanks();
+                var data = await _wemaInternalHttpProxy.GetBanks();
                 if (data == null)
                     return StatusCode(500, new APIResponse(ResponseCodes.ServerError, "Error: could not process request."));
 

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AlatAssessment.DTOs
 {
@@ -35,11 +32,6 @@ namespace AlatAssessment.DTOs
         public T Data { get; set; }
     }
 
-    public class ErrorAPIResponse : APIResponse
-    {
-        public IDictionary<string, string[]> Errors { get; set; }
-    }
-
     public class ResponseCodes
     {
         public const string Success = "200";
@@ -55,10 +47,7 @@ namespace AlatAssessment.DTOs
             Description = description;
         }
 
-        public ServiceResp()
-        {
-                
-        }
+        public ServiceResp(){ }
 
         public string Code { get; set; }
 

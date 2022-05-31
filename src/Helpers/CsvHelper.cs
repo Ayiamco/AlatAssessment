@@ -5,10 +5,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 using AlatAssessment.DataAccess.Contexts;
 using AlatAssessment.DataAccess.Entities;
 using AlatAssessment.DTOs;
+
 using CsvHelper;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -76,7 +79,6 @@ namespace AlatAssessment.Helpers
 
                 if(!context.Lgas.Any())
                    await  SeedLga(context);
-
             }
         }
     }

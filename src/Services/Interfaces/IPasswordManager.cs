@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AlatAssessment.DTOs;
 
 namespace AlatAssessment.Services.Interfaces
 {
-    public interface IWemaInternal
+    public interface IPasswordManager
     {
-        Task<List<BankDto>> GetBanks();
+        string GetHash(string password);
     }
 }

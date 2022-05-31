@@ -42,7 +42,6 @@ namespace AlatAssessment.DataAccess.Repositories
             context.Set<T1>().Update(entity);
         }
 
-
         public IEnumerable<T1> GetAll()
         {
             return context.Set<T1>().ToList();
