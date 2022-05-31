@@ -57,7 +57,7 @@ namespace AlatAssessment.Helpers
         }
 
 
-        public static IServiceCollection ConfigureHttpClients(IServiceCollection services )
+        public static IServiceCollection ConfigureAppHttpClients(this IServiceCollection services )
         {
             services.AddHttpClient(WemaInternalHttpProxyHttpProxy.ClientProxy.WemaInternal, client =>
             {

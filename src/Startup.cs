@@ -51,9 +51,11 @@ namespace AlatAssessment
             services.ConfigureAppSettings(Configuration)
                 .ConfigureRepositories()
                 .ConfigureMapper()
-                .ConfigureAppServices();
-            
-            
+                .ConfigureAppServices()
+                .ConfigureAppHttpClients();
+
+
+
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(AppSettings.ConnectionString));
