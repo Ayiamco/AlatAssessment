@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AlatAssessment.DataAccess.Entities;
 using AlatAssessment.DataAccess.UnitOfWork;
 using AlatAssessment.DTOs;
+using AlatAssessment.Helpers;
 using AlatAssessment.Services.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
@@ -45,11 +46,9 @@ namespace AlatAssessment.Services.Implementation
             return new ServiceResp(ResponseCodes.Success, "Verification code sent to phone."); ;
         }
 
-        public async Task<List<CustomerDTO>> GetAllCustomer(int pageSize,int page)
+        public  PaginationHelper.PagedList<CustomerDTO> GetAllCustomer(int pageSize,int page)
         {
-            var customers=await _unitOfWork.CustomerRepo.GetAllCustomers(pageSize, page);
-
-            return customers;
+            return _unitOfWork.CustomerRepo.GetAllCustomers(pageSize, page);
         }
 
         

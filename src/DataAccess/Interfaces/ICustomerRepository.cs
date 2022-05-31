@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AlatAssessment.DataAccess.Entities;
 using AlatAssessment.DTOs;
+using AlatAssessment.Helpers;
 
 namespace AlatAssessment.DataAccess.Interfaces
 {
     public interface ICustomerRepository : IGenericRepository<Customer,Guid>
     {
-        Task<List<CustomerDTO>> GetAllCustomers(int pageSize, int page);
+        PaginationHelper.PagedList<CustomerDTO> GetAllCustomers(int pageSize, int page);
     }
 }

@@ -51,11 +51,11 @@ namespace AlatAssessment.Controllers
         {
             try
             {
-                var resp = await _customerService.GetAllCustomer(pageSize ?? 10, page ?? 1);
+                var resp = _customerService.GetAllCustomer(pageSize ?? 10, page ?? 1);
                 if (resp == null)
                     return StatusCode(500, new APIResponse(ResponseCodes.ServerError, "Error: could not process request."));
 
-                return Ok(new APIResponse<List<CustomerDTO>>(ResponseCodes.Success, "", resp));
+                return Ok(new APIResponse<PaginationHelper.PagedList<CustomerDTO>>(ResponseCodes.Success, "", resp));
             }
             catch (Exception ex)
             {

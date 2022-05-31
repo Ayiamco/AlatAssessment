@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AlatAssessment.DTOs;
+using AlatAssessment.Helpers;
 
 namespace AlatAssessment.Services.Interfaces
 {
@@ -10,6 +11,6 @@ namespace AlatAssessment.Services.Interfaces
     {
         Task<ServiceResp> AddCustomer(AddCustomerDTO addCustomerDto);
 
-        Task<List<CustomerDTO>> GetAllCustomer(int pageSize, int page);
+        PaginationHelper.PagedList<CustomerDTO> GetAllCustomer(int pageSize, int page);
     }
 }
